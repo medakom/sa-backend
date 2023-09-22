@@ -7,11 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.adichar.sa.dto.ClientDTO;
 import tech.adichar.sa.dto.ErrorEntity;
 import tech.adichar.sa.entities.Client;
 import tech.adichar.sa.service.ClientService;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
@@ -38,7 +40,7 @@ public class ClientController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public List<Client> listClients(){
+    public Stream<ClientDTO> listClients(){
         return clientService.clientList();
     }
 

@@ -5,12 +5,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import tech.adichar.sa.dto.ClientDTO;
 import tech.adichar.sa.entities.Client;
 import tech.adichar.sa.repository.ClientRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +26,10 @@ public class ClientService {
         }
     }
 
-    public List<Client> clientList() {
-        return clientRepository.findAll();
+    public Stream<ClientDTO> clientList() {
+       return clientRepository.findAll()
+                .stream().map(client -> new ClientDTO(client.getId(),client.getEmail(),client.getPhone()));
+
     }
 
 

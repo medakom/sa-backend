@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "CLIENT")
@@ -19,4 +20,9 @@ public class Client implements Serializable {
     @Column(unique = true)
     private String email;
     private  String phone;
+    @Column(name = "creation")
+    private Date creation= new Date();
+    @Column(name = "mise_a_jour")
+    private Date updateDate = new Date();
+
 }
