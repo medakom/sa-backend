@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import tech.adichar.sa.dto.ClientDTO;
 import tech.adichar.sa.entities.Client;
+import tech.adichar.sa.mapper.ClientDTOMapper;
 import tech.adichar.sa.repository.ClientRepository;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class ClientService {
     private final ClientRepository clientRepository;
+    private final ClientDTOMapper clientDTOMapper;
 
     public void createdClient(Client client) {
         Client clientDB = clientRepository.findByEmail(client.getEmail());
@@ -28,7 +30,7 @@ public class ClientService {
 
     public Stream<ClientDTO> clientList() {
        return clientRepository.findAll()
-                .stream().map(client -> new ClientDTO(client.getId(),client.getEmail(),client.getPhone()));
+                .stream().map(clientDTOMapper::apply);
 
     }
 
